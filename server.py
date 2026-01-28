@@ -44,14 +44,14 @@ def save_state(state):
 # --------------------------------------------------
 
 def send_message(to, text):
-    if not text:
-        return
+    print("### SEND_MESSAGE CALLED ###")
 
     url = f"https://graph.facebook.com/v18.0/{PHONE_NUMBER_ID}/messages"
     headers = {
         "Authorization": f"Bearer {ACCESS_TOKEN}",
         "Content-Type": "application/json"
     }
+
     payload = {
         "messaging_product": "whatsapp",
         "to": to,
@@ -59,11 +59,10 @@ def send_message(to, text):
         "text": {"body": text}
     }
 
-   r = requests.post(url, headers=headers, json=payload)
+    r = requests.post(url, headers=headers, json=payload)
 
-print("STATUS:", r.status_code)
-print("RESPONSE:", r.text)
-
+    print("STATUS:", r.status_code)
+    print("RESPONSE:", r.text)
 
 
 # --------------------------------------------------
@@ -156,6 +155,7 @@ def start_chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
