@@ -1,3 +1,4 @@
+print("### SERVER.PY LOADED ###")
 import os
 import requests
 from flask import Flask, request, jsonify
@@ -9,6 +10,7 @@ PHONE_NUMBER_ID = os.environ["PHONE_NUMBER_ID"]
 app = Flask(__name__)
 
 def send_message(to, text):
+    print("### SEND_MESSAGE CALLED ###")
     url = f"https://graph.facebook.com/v18.0/{PHONE_NUMBER_ID}/messages"
     headers = {
         "Authorization": f"Bearer {ACCESS_TOKEN}",
@@ -29,6 +31,7 @@ def send_message(to, text):
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
+    print("### WEBHOOK HIT ###")
     data = request.get_json()
     print("INCOMING:", data)
 
@@ -68,6 +71,7 @@ def start_chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
