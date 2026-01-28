@@ -46,3 +46,9 @@ def webhook():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+@app.route("/start", methods=["GET"])
+def start_chat():
+    test_number = "TUO_NUMERO_CON_PREFISSO"  # es: 393391236716
+    send_message(test_number, "hey")
+    return "ok", 200
+
