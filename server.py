@@ -136,18 +136,18 @@ def webhook():
 
 @app.route("/start", methods=["GET"])
 def start_chat():
-    test_number = os.environ.get("TEST_NUMBER")  # es: 393391236716
+    test_number = os.environ.get("TEST_NUMBER")
 
     if not test_number:
-        return "TEST_NUMBER non configurato", 400
+        return "test number non configurato", 400
 
-    with lock:
-        state = load_state()
-        remember_event(state, "positivo", 0.1)
-        save_state(state)
+    state = load_state()
+    remember_event(state, "positivo", 0.1)
+    save_state(state)
 
-    send_message(test_number, "hey")
+    send_message(test_number, "Hey")
     return "ok", 200
+
 
 
 # --------------------------------------------------
@@ -156,5 +156,6 @@ def start_chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
