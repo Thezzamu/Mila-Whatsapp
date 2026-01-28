@@ -59,9 +59,11 @@ def send_message(to, text):
         "text": {"body": text}
     }
 
-    r = requests.post(url, headers=headers, json=payload)
-    print("SEND_MESSAGE STATUS:", r.status_code)
-    print("SEND_MESSAGE RESP:", r.text)
+   r = requests.post(url, headers=headers, json=payload)
+
+print("STATUS:", r.status_code)
+print("RESPONSE:", r.text)
+
 
 
 # --------------------------------------------------
@@ -154,6 +156,7 @@ def start_chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
