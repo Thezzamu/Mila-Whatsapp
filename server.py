@@ -138,15 +138,15 @@ def webhook():
 def start_chat():
     # METTI QUI IL TUO NUMERO PERSONALE (formato internazionale SENZA +)
     test_number = os.environ.get("393391236716")
-    if not test_number:
-        return "TEST_NUMBER missing", 400
+    if not 393391236716:
+        return "393391236716", 400
 
     with lock:
         state = load_state()
         remember_event(state, "positivo", 0.1)
         save_state(state)
 
-    send_message(test_number, "hey")
+    send_message(test_number, "Hey")
     return "ok", 200
 
 
@@ -156,3 +156,4 @@ def start_chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
