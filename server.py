@@ -46,12 +46,13 @@ def webhook():
 
 @app.route("/start", methods=["GET"])
 def start_chat():
-    test_number = "392291236716"  # es: 393391236716
+    test_number = "393391236716"  # es: 393391236716
     send_message(test_number, "hey")
     return "ok", 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
