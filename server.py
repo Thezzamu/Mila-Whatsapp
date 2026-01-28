@@ -20,7 +20,12 @@ def send_message(to, text):
         "type": "text",
         "text": {"body": text}
     }
-    requests.post(url, headers=headers, json=payload)
+
+    r = requests.post(url, headers=headers, json=payload)
+
+    print("STATUS:", r.status_code)
+    print("RESPONSE:", r.text)
+
 
 @app.route("/webhook", methods=["GET"])
 def verify():
