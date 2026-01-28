@@ -27,27 +27,38 @@ def send_message(to, text):
     print("RESPONSE:", r.text)
 
 
-@app.route("/webhook", methods=["GET"])
-def verify():
-    if request.args.get("hub.verify_token") == "mila":
-        return request.args.get("hub.challenge"), 200
-    return "Forbidden", 403
-
 @app.route("/webhook", methods=["POST"])
 def webhook():
     data = request.get_json()
+    print("INCOMING:", data)
+
     try:
-        msg = data["entry"][0]["changes"][0]["value"]["messages"][0]
-        user = msg["from"]
-        text = msg["text"]["body"]
+        entry = data.get("entry", [])[0]
+        changes = entry.get("changes", [])[0]
+        value = changes.get("value", {})
+
+        messages = value.get("messages")
+        if not messages:
+            print("No messages field, ignoring")
+            return jsonify(ok=True), 200
+
+        msg = messages[0]
+        user = msg.get("from")
+        text = msg.get("text", {}).get("body")
+
+        if not text:
+            print("No text message, ignoring")
+            return jsonify(ok=True), 200
 
         reply = mila_reply(text)
         if reply:
             send_message(user, reply)
+
     except Exception as e:
         print("Webhook error:", e)
 
     return jsonify(ok=True), 200
+
 
 @app.route("/start", methods=["GET"])
 def start_chat():
@@ -57,6 +68,7 @@ def start_chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
