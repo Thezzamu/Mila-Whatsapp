@@ -1,9 +1,36 @@
 {
-  "confidenza": 0.15,
-  "ultima_risposta": null,
-  "ultima_interazione": null,
-  "eventi": [],
-  "fase_vita": "università",
-  "stile": "freddo",
-  "giorni_silenzio": 0
+  "confidenza": 0.25,
+  "interesse": 0.3,
+
+  "memoria_positiva": 0.35,
+  "memoria_negativa": 0.15,
+
+  "risentimento": 0.1,
+
+  "gelosia": 0.0,
+  "attenzione_altrove": 0.2,
+
+  "mood": "neutra",
+  "fase_vita": "standard",
+
+  "ultimo_messaggio_utente": 0.0,
+  "ultima_risposta": 0.0,
+  "ultima_interazione": 0.0,
+
+  "persona_preferita": true,
+
+  "memoria_eventi": [
+    {
+      "tipo": "positivo",
+      "peso": 0.12,
+      "timestamp": 0.0
+    },
+    {
+      "tipo": "ambiguo",
+      "peso": 0.08,
+      "timestamp": 0.0
+    }
+  ],
+
+  "memoria_massima": 30
 }
