@@ -31,37 +31,39 @@ def send_message(to, text):
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
-    print("### WEBHOOK HIT ###")
     data = request.get_json()
     print("INCOMING:", data)
 
     try:
-        entry = data.get("entry", [])[0]
-        changes = entry.get("changes", [])[0]
-        value = changes.get("value", {})
+        entry = data["entry"][0]
+        change = entry["changes"][0]
+        value = change["value"]
 
-        messages = value.get("messages")
-        if not messages:
-            print("No messages field, ignoring")
+        # ⚠️ ignora eventi che non sono messaggi
+        if "messages" not in value:
+            print("No messages event, ignoring")
             return jsonify(ok=True), 200
 
-        msg = messages[0]
-        user = msg.get("from")
+        msg = value["messages"][0]
+        user = msg["from"]
         text = msg.get("text", {}).get("body")
 
+        print("TEXT:", text)
+
         if not text:
-            print("No text message, ignoring")
+            print("No text body")
             return jsonify(ok=True), 200
 
         reply = mila_reply(text)
+        print("REPLY:", reply)
+
         if reply:
             send_message(user, reply)
 
     except Exception as e:
-        print("Webhook error:", e)
+        print("WEBHOOK ERROR:", e)
 
     return jsonify(ok=True), 200
-
 
 @app.route("/start", methods=["GET"])
 def start_chat():
@@ -71,6 +73,7 @@ def start_chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
