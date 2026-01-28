@@ -137,11 +137,7 @@ def webhook():
 
 @app.route("/start", methods=["GET"])
 def start_chat():
-    test_number = "393391236716"  # <-- HARDCODE TEMPORANEO
-
-    state = load_state()
-    remember_event(state, "positivo", 0.1)
-    save_state(state)
+    test_number = "393391236716"  # SENZA +
 
     send_message(test_number, "Hey")
     return "ok", 200
@@ -155,6 +151,7 @@ def start_chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
