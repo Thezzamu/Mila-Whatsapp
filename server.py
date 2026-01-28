@@ -136,7 +136,7 @@ def webhook():
 
 @app.route("/start", methods=["GET"])
 def start_chat():
-    test_number = os.environ.get("TEST_NUMBER")
+    test_number = os.environ.get("393391236716")
 
     if not test_number:
         return "test number non configurato", 400
@@ -156,6 +156,7 @@ def start_chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
