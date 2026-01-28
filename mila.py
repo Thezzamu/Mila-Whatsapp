@@ -1,5 +1,6 @@
 import json
 import random
+import time
 from datetime import datetime, timedelta
 from dateutil.parser import parse
 
@@ -280,3 +281,4 @@ def mila_reply(text, state):
         return random.choice(["boh", "mah"])
 
     return random.choice(fallback)
+
